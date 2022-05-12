@@ -1,0 +1,64 @@
+﻿@model app_web_backend_ads.Models.Veiculo
+
+@{
+    ViewData["Title"] = "Relatorio";
+}
+
+<h2>Veiculo: @Model.Nome</h2>
+
+<div>
+    <h4>Consumos</h4>
+    <hr />
+        <table class="table">
+          <thead>
+             <tr>
+                <th>
+                     Descricao
+                </th>
+                <th>
+                     Data
+                </th>
+                <th>
+                     Valor
+                </th>
+                <th>
+                     Kilometragem
+                </th>
+                <th>
+                     Tipo de Combustivel
+                </th>
+                <th></th>
+             </tr>
+          </thead>
+          <tbody>
+             @foreach (var item in Model.Consumos.OrderByDescending(c => c.Data)) 
+                {
+                 <tr>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Descricao)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Data)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Valor)
+                     </td><td>
+                         @Html.DisplayFor(modelItem => item.Km)
+                     </td><td>
+                         @Html.DisplayFor(modelItem => item.Tipo)
+                     </td>
+                     <td>
+                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                         <a asp-action="Relatorio" asp-route-id="@item.Id">Relatotio</a>
+                      </td>
+                 </tr>
+                  }         
+          </tbody>
+        </table>
+    
+</div>
+<div>
+   <a asp-action="Index" class="btn btn-info">Voltar</a>
+</div>
